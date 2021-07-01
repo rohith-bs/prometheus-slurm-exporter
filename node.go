@@ -53,7 +53,7 @@ func ParseNodeMetrics(input []byte) map[string]*NodeMetrics {
 	for _, line := range linesUniq {
 		node := strings.Fields(line)
 		nodeName := node[0]
-		nodeStatus := node[3] // mixed, allocated, etc.
+		nodeStatus := node[4] // mixed, allocated, etc.
 
 		nodes[nodeName] = &NodeMetrics{0, 0, 0, 0, 0, 0, ""}
 
@@ -82,7 +82,7 @@ func ParseNodeMetrics(input []byte) map[string]*NodeMetrics {
 // NodeData executes the sinfo command to get data for each node
 // It returns the output of the sinfo command
 func NodeData() []byte {
-	cmd := exec.Command("sinfo", "-h", "-N", "-O", "NodeList,AllocMem,Memory,CPUsState,StateLong")
+	cmd := exec.Command("sinfo", "-h", "-N", "-O", "NodeList:30,AllocMem,Memory,CPUsState,StateLong")
 	out, err := cmd.Output()
 	if err != nil {
 		log.Fatal(err)
