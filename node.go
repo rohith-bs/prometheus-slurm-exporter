@@ -53,7 +53,7 @@ func ParseNodeMetrics(input []byte) map[string]*NodeMetrics {
 	for _, line := range linesUniq {
 		node := strings.Fields(line)
 		nodeName := node[0]
-		nodeStatus := node[4] // mixed, allocated, etc.
+		nodeStatus := node[3] // mixed, allocated, etc.
 
 		nodes[nodeName] = &NodeMetrics{0, 0, 0, 0, 0, 0, ""}
 
